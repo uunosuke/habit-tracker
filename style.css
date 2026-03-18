@@ -99,6 +99,10 @@ header h1 {
   border-bottom: 1px solid #f0f0f0;
 }
 
+#tracker-table td:first-child {
+  text-align: left;
+}
+
 #tracker-table tbody tr:last-child td {
   border-bottom: none;
 }
@@ -288,11 +292,24 @@ tr.drag-over {
   font-weight: 500;
 }
 
+/* Add + Summary row */
+.add-summary-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
 /* Add habit */
 .add-habit {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 32px;
+  flex: 1;
+  align-content: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .add-habit input {
@@ -341,7 +358,7 @@ tr.drag-over {
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 24px;
+  flex: 1;
 }
 
 .weekly-summary h2 {
@@ -445,8 +462,8 @@ tr.drag-over {
     width: 40px;
   }
 
-  .add-habit {
-    flex-wrap: wrap;
+  .add-summary-row {
+    flex-direction: column;
   }
 
   .add-habit input#new-unit {
