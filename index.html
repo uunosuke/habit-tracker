@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>週間ハビットトラッカー</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>週間ハビットトラッカー</h1>
+      <div class="week-nav">
+        <button id="prev-week" aria-label="前の週">&larr;</button>
+        <span id="week-label"></span>
+        <button id="next-week" aria-label="次の週">&rarr;</button>
+      </div>
+    </header>
+
+    <main>
+      <table id="tracker-table">
+        <thead>
+          <tr>
+            <th class="habit-col">習慣</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
+            <th>日</th>
+            <th class="progress-col">達成率</th>
+          </tr>
+        </thead>
+        <tbody id="tracker-body">
+        </tbody>
+      </table>
+
+      <div class="add-habit">
+        <input type="text" id="new-habit" placeholder="習慣名（例: 読書）" maxlength="50">
+        <input type="text" id="new-unit" placeholder="目標（例: 30分）" maxlength="20">
+        <button id="add-btn">追加</button>
+      </div>
+
+      <div class="weekly-summary">
+        <h2>今週のサマリー</h2>
+        <div class="summary-stats">
+          <div class="stat">
+            <span class="stat-value" id="total-completion">0%</span>
+            <span class="stat-label">全体達成率</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="best-day">-</span>
+            <span class="stat-label">ベストデー</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="streak-count">0</span>
+            <span class="stat-label">連続日数</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="graph-section">
+        <h2>達成率グラフ（過去4週間）</h2>
+        <canvas id="achievement-graph"></canvas>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

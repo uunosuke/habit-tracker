@@ -1,0 +1,456 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #16213e;
+  margin-bottom: 16px;
+}
+
+.week-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.week-nav button {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.week-nav button:hover {
+  background: #e8eaf0;
+}
+
+#week-label {
+  font-size: 1.05rem;
+  font-weight: 500;
+  min-width: 220px;
+  text-align: center;
+}
+
+
+/* Table */
+#tracker-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+#tracker-table thead {
+  background: #16213e;
+  color: #fff;
+}
+
+#tracker-table th {
+  padding: 14px 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#tracker-table th.habit-col {
+  text-align: left;
+  padding-left: 20px;
+  min-width: 180px;
+}
+
+#tracker-table th.progress-col {
+  min-width: 80px;
+}
+
+#tracker-table td {
+  padding: 12px 10px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#tracker-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+#tracker-table tbody tr:hover {
+  background: #f8f9fb;
+}
+
+/* Habit name cell */
+.habit-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 10px;
+}
+
+.habit-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.habit-name span {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.habit-unit {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 400;
+  cursor: default;
+}
+
+.habit-unit:hover {
+  text-decoration: underline dotted #bbb;
+}
+
+.habit-unit-add {
+  font-size: 0.7rem;
+  color: #bbb;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.habit-unit-add:hover {
+  color: #3498db;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  color: #e74c3c;
+  background: #fef0ef;
+}
+
+/* Habit actions (delete + reorder) */
+.habit-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.drag-handle {
+  color: #bbb;
+  cursor: grab;
+  font-size: 0.9rem;
+  padding: 2px 4px;
+  line-height: 1;
+  user-select: none;
+}
+
+.drag-handle:hover {
+  color: #888;
+}
+
+/* Drag and drop */
+tr[draggable] {
+  transition: opacity 0.2s;
+}
+
+tr.dragging {
+  opacity: 0.4;
+}
+
+tr.drag-over {
+  outline: 2px solid #3498db;
+  outline-offset: -2px;
+}
+
+/* Editable habit label */
+.habit-label {
+  cursor: default;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.habit-label:hover {
+  text-decoration: underline dotted #bbb;
+}
+
+.habit-edit-input {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border: 2px solid #3498db;
+  border-radius: 6px;
+  outline: none;
+  width: 120px;
+  background: #fff;
+}
+
+/* Checkbox cells */
+.check-cell {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.check-cell .checkbox {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-size: 0;
+}
+
+.check-cell .checkbox.checked {
+  background: #27ae60;
+  border-color: #27ae60;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.check-cell .checkbox:hover {
+  border-color: #27ae60;
+  transform: scale(1.1);
+}
+
+.check-cell.today .checkbox {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Progress bar */
+.progress-cell {
+  min-width: 80px;
+}
+
+.progress-bar {
+  width: 60px;
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.progress-bar .fill {
+  height: 100%;
+  background: #27ae60;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 500;
+}
+
+/* Add habit */
+.add-habit {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.add-habit input {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.add-habit input#new-habit {
+  flex: 2;
+}
+
+.add-habit input#new-unit {
+  flex: 1;
+  max-width: 160px;
+}
+
+.add-habit input:focus {
+  border-color: #3498db;
+}
+
+.add-habit button {
+  padding: 12px 28px;
+  background: #16213e;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.add-habit button:hover {
+  background: #1a2a4a;
+}
+
+/* Summary */
+.weekly-summary {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.weekly-summary h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #16213e;
+}
+
+.summary-stats {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.stat {
+  text-align: center;
+  flex: 1;
+  padding: 16px;
+  background: #f8f9fb;
+  border-radius: 10px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #27ae60;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Graph */
+.graph-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.graph-section h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #16213e;
+}
+
+#achievement-graph {
+  width: 100%;
+  height: 200px;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #aaa;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .app {
+    padding: 16px 8px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  #tracker-table th,
+  #tracker-table td {
+    padding: 10px 4px;
+    font-size: 0.8rem;
+  }
+
+  #tracker-table th.habit-col {
+    padding-left: 8px;
+    min-width: 100px;
+  }
+
+  .check-cell .checkbox {
+    width: 24px;
+    height: 24px;
+  }
+
+  .summary-stats {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .progress-bar {
+    width: 40px;
+  }
+
+  .add-habit {
+    flex-wrap: wrap;
+  }
+
+  .add-habit input#new-unit {
+    max-width: none;
+    flex: 1;
+  }
+}
